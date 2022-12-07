@@ -10,10 +10,10 @@ describe('Component CurrencyForm', () => {
   it('should run action callback with proper data on form submit', () => {
      // set test values to fields
      const testCases = [
-        { amount: '100', from: 'PLN', to: 'USD' },
-        { amount: '20', from: 'USD', to: 'PLN' },
-        { amount: '200', from: 'PLN', to: 'USD' },
-        { amount: '345', from: 'USD', to: 'PLN' },
+        { amount: 100, from: 'PLN', to: 'USD' },
+        { amount: 20, from: 'USD', to: 'PLN' },
+        { amount: 20, from: 'PLN', to: 'USD' },
+        { amount: 345, from: 'USD', to: 'PLN' },
     ];
 
     for (const testObj of testCases) {
@@ -31,7 +31,7 @@ describe('Component CurrencyForm', () => {
         const selectTo = screen.getByTestId('selectTo');
 
         // set test values to fields
-        userEvent.type(inputAmount, testObj.amount);
+        userEvent.type(inputAmount, (testObj.amount).toString());
         userEvent.selectOptions(selectFrom, testObj.from);
         userEvent.selectOptions(selectTo, testObj.to);
 
@@ -40,7 +40,7 @@ describe('Component CurrencyForm', () => {
 
         // check if action callback was called once and with proper argument
         expect(action).toHaveBeenCalledTimes(1);
-        expect(action).toHaveBeenCalledWith({amount: Number(testObj.amount), from: testObj.from, to: testObj.to});
+        expect(action).toHaveBeenCalledWith({amount: testObj.amount, from: testObj.from, to: testObj.to});
 
         cleanup();
     }
