@@ -16,7 +16,7 @@ const CurrencyBox = () => {
   return (
     <main>
       <CurrencyForm action={handleDataChange} />
-      { data.amount ? <ResultBox {...data} /> : null }
+      { data.amount ? <ResultBox {...data} /> : data.amount === 0 ? <ResultBox {...data} /> : null }
     </main>
   );
 };
